@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
+import remixt
 import remixt.cn_plot as cn_plot
 
 def parse_args():

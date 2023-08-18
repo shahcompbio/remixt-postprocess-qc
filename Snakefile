@@ -6,7 +6,8 @@ if not os.path.exists(config['log_dir']): subprocess.run(f'mkdir -p {config["log
 if not os.path.exists(config['tmp_dir']): subprocess.run(f'mkdir -p {config["tmp_dir"]}', shell=True)
 
 #SAMPLES = ['HCM-CSHL-0058-C34-86A']
-SAMPLES = pd.read_table(config['metadata'])['isabl_sample_id'].unique()
+SAMPLES = pd.read_table(config['metadata'])['isabl_sample_id'].unique().tolist()
+#SAMPLES = ['HCM-CSHL-0178-C25-85A']
 
 rule all:
     input:
@@ -26,6 +27,8 @@ rule plot_qc:
         cn = _get_remixtpp_cn_path,
     output:
         pdf = 'results/remixt-pp-qc/{sample}.pdf',
+#     singularity:
+#         '/juno/work/shah/isabl_software/singularity_sifs/wgs/wgs_remixt_hg38_v0_2_12.sif',
     shell:
         'python scripts/plot_remixt_pp.py -i {input.cn} -o {output.pdf}'
 
