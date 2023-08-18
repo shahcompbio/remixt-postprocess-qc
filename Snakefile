@@ -5,7 +5,8 @@ import pandas as pd
 if not os.path.exists(config['log_dir']): subprocess.run(f'mkdir -p {config["log_dir"]}', shell=True)
 if not os.path.exists(config['tmp_dir']): subprocess.run(f'mkdir -p {config["tmp_dir"]}', shell=True)
 
-SAMPLES = ['HCM-CSHL-0058-C34-86A']
+#SAMPLES = ['HCM-CSHL-0058-C34-86A']
+SAMPLES = pd.read_table(config['metadata'])['isabl_sample_id'].unique()
 
 rule all:
     input:
